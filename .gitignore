@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+
+# Claude
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated/temp files
+*.log
+*.tmp
+manual_screenshots/
+
+# Large data
+data/

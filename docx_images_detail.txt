@@ -1,0 +1,100 @@
+[Parag 60] Images: ['media/image1.png']
+  Before: 
+  Current: 
+  After: 日志采集汇聚模块界面
+
+[Parag 86] Images: ['media/image2.png']
+  Before: 
+  Current: 
+  After: 日志解析引擎模块界面
+
+[Parag 114] Images: ['media/image3.png']
+  Before: 
+  Current: 
+  After: 异常检测识别模块界面
+
+[Parag 141] Images: ['media/image4.png']
+  Before: 
+  Current: 
+  After: 日志联机搜索模块界面
+
+[Parag 166] Images: ['media/image5.png']
+  Before: 
+  Current: 
+  After: 故障预测模型模块界面
+
+[Parag 190] Images: ['media/image6.png']
+  Before: 
+  Current: 
+  After: 根因定位分析模块界面
+
+[Parag 220] Images: ['media/image7.png']
+  Before: 
+  Current: 
+  After: 告警管理中心模块界面
+
+[Parag 245] Images: ['media/image8.png']
+  Before: 
+  Current: 
+  After: 服务拓扑发现模块界面
+
+[Parag 268] Images: ['media/image9.png']
+  Before: 
+  Current: 
+  After: 智能诊断修复模块界面
+
+[Parag 294] Images: ['media/image10.png']
+  Before: 
+  Current: 
+  After: 态势感知总览模块界面
+
+[Parag 320] Images: ['media/image11.png']
+  Before: 
+  Current: 
+  After: 智能报告生成模块界面
+
+[Parag 344] Images: ['media/image12.png']
+  Before: 
+  Current: 
+  After: 知识图谱构建模块界面
+
+[Parag 367] Images: ['media/image13.png']
+  Before: 
+  Current: 
+  After: SLA合规监控模块界面
+
+[Parag 394] Images: ['media/image14.png']
+  Before: 
+  Current: 
+  After: 模型训练管理模块界面
+
+[Parag 420] Images: ['media/image15.png']
+  Before: 
+  Current: 
+  After: 系统监控诊断模块界面
+
+[Parag 446] Images: ['media/image16.png']
+  Before: 
+  Current: 
+  After: 多维可视化模块界面
+
+[Parag 469] Images: ['media/image17.png']
+  Before: 
+  Current: 
+  After: 告警通知配置模块界面
+
+[Parag 495] Images: ['media/image18.png']
+  Before: 
+  Current: 
+  After: 自定义仪表盘模块界面
+
+[Parag 516] Images: ['media/image19.png']
+  Before: 
+  Current: 
+  After: 配置管理中心模块界面
+
+[Parag 541] Images: ['media/image20.png']
+  Before: 
+  Current: 
+  After: 日志审计归档模块界面
+

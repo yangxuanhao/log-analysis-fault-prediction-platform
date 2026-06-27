@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.spec.bak
+build/
+dist/
+output/
+*.egg-info/
+.venv/
+venv/
+env/
+*.png
+!assets/*.png
+.idea/
+.vscode/

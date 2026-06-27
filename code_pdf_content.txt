@@ -1,0 +1,576 @@
+Total pages: 90
+
+=== Page 1 ===
+# ==== main.py (44行) ====
+import sys
+from PyQt6.QtWidgets import QApplication, QStackedWidget
+from PyQt6.QtCore import Qt
+from core.constants import APP_NAME
+from core.styles import GLOBAL_STYLE
+from ui.login_window import LoginWindow
+from ui.main_window import MainWindow
+class Application(QStackedWidget):
+def __init__(self):
+super().__init__()
+self._login = LoginWindow()
+self._main: MainWindow | None = None
+self.addWidget(self._login)
+self._login.login_success.connect(self._on_login)
+self.setWindowTitle(APP_NAME)
+self.resize(1100, 680)
+def _on_login(self, username: str) -> None:
+self._main = MainWindow(username)
+self.addWidget(self._main)
+self.setCurrentWidget(self._main)
+self.resize(self._main.size())
+self.setWindowTitle(self._main.windowTitle())
+def main() -> int:
+QApplication.setHighDpiScaleFactorRoundingPolicy(
+Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
+)
+app = QApplication(sys.argv)
+app.setApplicationName(APP_NAME)
+app.setStyle("Fusion")
+app.setStyleSheet(GLOBAL_STYLE)
+window = Application()
+window.show()
+return app.exec()
+if __name__ == "__main__":
+sys.exit(main())
+# ==== core/__init__.py (0行) ====
+# ==== core/styles.py (185行) ====
+BG_DARK = "#0b1426"
+BG_PANEL = "#121e3a"
+BG_CARD = "#1a2a4e"
+BG_INPUT = "#1f3060"
+ACCENT = "#4fc3f7"
+ACCENT_DIM = "#29b6f6"
+ACCENT_GLOW = "#81d4fa"
+TEXT_PRIMARY = "#e8edf5"
+TEXT_SECONDARY = "#8fa8c8"
+BORDER = "#2a4070"
+WARN = "#ffab40"
+DANGER = "#ff5252"
+GLOBAL_STYLE = f"""
+QMainWindow, QWidget {{
+background-color: {BG_DARK};
+
+
+=== Page 2 ===
+color: {TEXT_PRIMARY};
+font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+font-size: 13px;
+}}
+QPushButton {{
+background-color: {BG_CARD};
+color: {TEXT_PRIMARY};
+border: 1px solid {BORDER};
+border-radius: 6px;
+padding: 8px 14px;
+min-height: 28px;
+}}
+QLabel {{
+background: transparent;
+color: {TEXT_PRIMARY};
+border: none;
+}}
+QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox, QTextEdit, QPlainTextEdit {{
+background-color: {BG_INPUT};
+color: {TEXT_PRIMARY};
+border: 1px solid {BORDER};
+border-radius: 6px;
+padding: 8px 12px;
+selection-background-color: {ACCENT_DIM};
+}}
+QLineEdit:focus, QComboBox:focus, QSpinBox:focus, QDoubleSpinBox:focus {{
+border: 1px solid {ACCENT};
+}}
+QPushButton:hover {{
+background-color: #1f3a6a;
+border-color: {ACCENT_DIM};
+}}
+QPushButton:pressed {{
+background-color: #1565c0;
+color: #ffffff;
+}}
+QPushButton[primary="true"] {{
+background: qlineargradient(x1:0,y1:0,x2:1,y2:0, stop:0 #1565c0, stop:1 #1e88e5);
+color: #ffffff;
+border: 1px solid #42a5f5;
+font-weight: bold;
+font-size: 13px;
+}}
+QPushButton[primary="true"]:hover {{
+background: qlineargradient(x1:0,y1:0,x2:1,y2:0, stop:0 #1e88e5, stop:1 #42a5f5);
+color: #ffffff;
+border-color: #64b5f6;
+}}
+QPushButton[primary="true"]:pressed {{
+background: #0d47a1;
+color: #ffffff;
+}}
+QPushButton[danger="true"] {{
+background-color: #4a1520;
+
+
+=== Page 3 ===
+border: 1px solid {DANGER};
+color: #ffffff;
+font-weight: bold;
+}}
+QPushButton[danger="true"]:hover {{
+background-color: #6a2030;
+color: #ffffff;
+}}
+QTableWidget {{
+background-color: {BG_PANEL};
+alternate-background-color: {BG_PANEL};
+color: {TEXT_PRIMARY};
+gridline-color: {BORDER};
+border: 1px solid {BORDER};
+border-radius: 8px;
+selection-background-color: #1a3a6a;
+selection-color: {TEXT_PRIMARY};
+}}
+QTableWidget::item {{
+padding: 6px;
+border: none;
+}}
+QHeaderView::section {{
+background-color: {BG_CARD};
+color: {ACCENT};
+border: none;
+border-bottom: 1px solid {BORDER};
+border-right: 1px solid {BORDER};
+padding: 10px 8px;
+font-weight: bold;
+}}
+QHeaderView::section:last {{
+border-right: none;
+}}
+QTableCornerButton::section {{
+background-color: {BG_CARD};
+border: none;
+}}
+QScrollBar:vertical {{
+background: {BG_PANEL};
+width: 10px;
+border-radius: 5px;
+}}
+QScrollBar::handle:vertical {{
+background: {BORDER};
+border-radius: 5px;
+min-height: 30px;
+}}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
+height: 0;
+}}
+QTabWidget::pane {{
+border: 1px solid {BORDER};
+border-radius: 8px;
+
+
+=== Page 4 ===
+background: {BG_PANEL};
+}}
+QTabBar::tab {{
+background: {BG_CARD};
+color: {TEXT_SECONDARY};
+padding: 10px 20px;
+border-top-left-radius: 6px;
+border-top-right-radius: 6px;
+margin-right: 2px;
+}}
+QTabBar::tab:selected {{
+background: {BG_PANEL};
+color: {ACCENT};
+border-bottom: 2px solid {ACCENT};
+}}
+QGroupBox {{
+border: 1px solid {BORDER};
+border-radius: 8px;
+margin-top: 14px;
+padding-top: 18px;
+background-color: {BG_PANEL};
+font-weight: bold;
+color: {ACCENT};
+}}
+QGroupBox::title {{
+subcontrol-origin: margin;
+left: 14px;
+padding: 0 8px;
+background-color: {BG_PANEL};
+}}
+QProgressBar {{
+border: 1px solid {BORDER};
+border-radius: 6px;
+background: {BG_INPUT};
+text-align: center;
+color: {TEXT_PRIMARY};
+height: 22px;
+}}
+QProgressBar::chunk {{
+background: qlineargradient(x1:0,y1:0,x2:1,y2:0, stop:0 {ACCENT_DIM}, stop:1 {ACCENT});
+border-radius: 5px;
+}}
+QSlider::groove:horizontal {{
+height: 6px;
+background: {BG_INPUT};
+border-radius: 3px;
+}}
+QSlider::handle:horizontal {{
+width: 16px;
+margin: -5px 0;
+background: {ACCENT};
+border-radius: 8px;
+}}
+QToolTip {{
+
+
+=== Page 5 ===
+background-color: {BG_CARD};
+color: {TEXT_PRIMARY};
+border: 1px solid {ACCENT_DIM};
+padding: 6px;
+border-radius: 4px;
+}}
+"""
+# ==== core/constants.py (8行) ====
+APP_NAME = "信息系统运行日志智能分析与故障预测及根因定位平台"
+APP_VERSION = "1.0"
+DEFAULT_USERNAME = "admin"
+DEFAULT_PASSWORD = "123456"
+WINDOW_MIN_WIDTH = 1280
+WINDOW_MIN_HEIGHT = 720
+DEFAULT_WIDTH = 1463
+DEFAULT_HEIGHT = 851
+# ==== core/auth.py (58行) ====
+import json
+import hashlib
+from pathlib import Path
+class AuthManager:
+def __init__(self) -> None:
+self._path = Path.home() / ".sv200x_agc_avc" / "users.json"
+self._path.parent.mkdir(parents=True, exist_ok=True)
+self._users: dict[str, str] = {}
+self._load()
+def _hash(self, password: str) -> str:
+return hashlib.sha256(password.encode("utf-8")).hexdigest()
+def _load(self) -> None:
+if self._path.exists():
+try:
+data = json.loads(self._path.read_text(encoding="utf-8"))
+self._users = {k: v for k, v in data.items() if isinstance(v, str)}
+except (json.JSONDecodeError, OSError):
+self._users = {}
+if "admin" not in self._users:
+self._users["admin"] = self._hash("123456")
+self._save()
+def _save(self) -> None:
+self._path.write_text(
+json.dumps(self._users, ensure_ascii=False, indent=2),
+encoding="utf-8",
+)
+def login(self, username: str, password: str) -> tuple[bool, str]:
+username = username.strip()
+if not username or not password:
+return False, "账号和密码不能为空"
+stored = self._users.get(username)
+if stored is None:
+return False, "账号不存在"
+if stored != self._hash(password):
+return False, "密码错误"
+
+
+=== Page 6 ===
+return True, "登录成功"
+def register(self, username: str, password: str, confirm: str) -> tuple[bool, str]:
+username = username.strip()
+if not username or not password:
+return False, "账号和密码不能为空"
+if len(username) < 3:
+return False, "账号长度至少3个字符"
+if len(password) < 6:
+return False, "密码长度至少6个字符"
+if password != confirm:
+return False, "两次输入的密码不一致"
+if username in self._users:
+return False, "该账号已存在"
+self._users[username] = self._hash(password)
+self._save()
+return True, "注册成功，请登录"
+# ==== core/dialogs.py (217行) ====
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import (
+QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTextEdit, QFrame,
+)
+from core.styles import BG_PANEL, ACCENT, TEXT_PRIMARY, TEXT_SECONDARY, BORDER,
+DANGER, WARN
+_BTN_PRIMARY = """
+QPushButton {
+background: qlineargradient(x1:0,y1:0,x2:1,y2:0, stop:0 #1565c0, stop:1 #1e88e5);
+color: #ffffff;
+border: 1px solid #42a5f5;
+border-radius: 6px;
+padding: 8px 20px;
+font-size: 13px;
+font-weight: bold;
+min-height: 32px;
+}
+QPushButton:hover {
+background: qlineargradient(x1:0,y1:0,x2:1,y2:0, stop:0 #1e88e5, stop:1 #42a5f5);
+color: #ffffff;
+}
+QPushButton:pressed {
+background: #0d47a1;
+color: #ffffff;
+}
+"""
+_BTN_SECONDARY = """
+QPushButton {
+background-color: #1f3060;
+color: #e8edf5;
+border: 1px solid #2a4070;
+border-radius: 6px;
+padding: 8px 20px;
+
+
+=== Page 7 ===
+font-size: 13px;
+min-height: 32px;
+}
+QPushButton:hover {
+background-color: #25366a;
+border-color: #4fc3f7;
+color: #ffffff;
+}
+"""
+_BTN_DANGER = """
+QPushButton {
+background-color: #8b2030;
+color: #ffffff;
+border: 1px solid #ff5252;
+border-radius: 6px;
+padding: 8px 20px;
+font-size: 13px;
+font-weight: bold;
+min-height: 32px;
+}
+QPushButton:hover {
+background-color: #a82838;
+color: #ffffff;
+}
+"""
+def _style_button(btn: QPushButton, kind: str = "primary") -> None:
+styles
+=
+{"primary":
+_BTN_PRIMARY,
+"secondary":
+_BTN_SECONDARY,
+"danger":
+_BTN_DANGER}
+btn.setStyleSheet(styles.get(kind, _BTN_PRIMARY))
+btn.setFont(QFont("Microsoft YaHei", 13, QFont.Weight.Bold if kind != "secondary" else
+QFont.Weight.Normal))
+class StyledDialog(QDialog):
+def __init__(self, title: str, message: str, dialog_type: str = "info", parent=None):
+super().__init__(parent)
+self.setWindowTitle(title)
+self.setModal(True)
+self.setMinimumWidth(420)
+self.setWindowFlags(self.windowFlags()
+&
+~Qt.WindowType.WindowContextHelpButtonHint)
+self._build(message, dialog_type)
+def _build(self, message: str, dialog_type: str) -> None:
+icons = {"info": "ℹ", "success": "✓", "warning": "⚠", "error": "✕"}
+colors = {"info": ACCENT, "success": "#81c784", "warning": WARN, "error": DANGER}
+icon = icons.get(dialog_type, "ℹ")
+color = colors.get(dialog_type, ACCENT)
+layout = QVBoxLayout(self)
+layout.setContentsMargins(24, 24, 24, 20)
+layout.setSpacing(16)
+header = QHBoxLayout()
+icon_label = QLabel(icon)
+icon_label.setFont(QFont("Segoe UI", 22))
+icon_label.setStyleSheet(f"color: {color}; background: transparent;")
+icon_label.setFixedWidth(40)
+title_label = QLabel(self.windowTitle())
+
+
+=== Page 8 ===
+title_label.setFont(QFont("Microsoft YaHei", 14, QFont.Weight.Bold))
+title_label.setStyleSheet(f"color: {TEXT_PRIMARY}; background: transparent;")
+header.addWidget(icon_label)
+header.addWidget(title_label, 1)
+layout.addLayout(header)
+line = QFrame()
+line.setFrameShape(QFrame.Shape.HLine)
+line.setStyleSheet(f"background: {BORDER}; max-height: 1px; border: none;")
+layout.addWidget(line)
+body = QLabel(message)
+body.setWordWrap(True)
+body.setStyleSheet(f"color: {TEXT_SECONDARY}; background: transparent; padding: 4px
+0;")
+layout.addWidget(body)
+btn_row = QHBoxLayout()
+btn_row.addStretch()
+ok_btn = QPushButton("确定")
+_style_button(ok_btn, "primary")
+ok_btn.setMinimumWidth(100)
+ok_btn.clicked.connect(self.accept)
+btn_row.addWidget(ok_btn)
+layout.addLayout(btn_row)
+self.setStyleSheet(f"QDialog {{ background-color: {BG_PANEL}; border: 1px solid
+{BORDER}; }}")
+class ConfirmDialog(QDialog):
+def __init__(self, title: str, message: str, parent=None):
+super().__init__(parent)
+self.setWindowTitle(title)
+self.setModal(True)
+self.setMinimumWidth(440)
+self._result = False
+self._build(message)
+def _build(self, message: str) -> None:
+layout = QVBoxLayout(self)
+layout.setContentsMargins(24, 24, 24, 20)
+layout.setSpacing(16)
+title_label = QLabel(self.windowTitle())
+title_label.setFont(QFont("Microsoft YaHei", 14, QFont.Weight.Bold))
+title_label.setStyleSheet(f"color: {WARN}; background: transparent;")
+layout.addWidget(title_label)
+body = QLabel(message)
+body.setWordWrap(True)
+body.setStyleSheet(f"color: {TEXT_SECONDARY}; background: transparent;")
+layout.addWidget(body)
+btn_row = QHBoxLayout()
+btn_row.addStretch()
+cancel_btn = QPushButton("取消")
+_style_button(cancel_btn, "secondary")
+cancel_btn.setMinimumWidth(90)
+cancel_btn.clicked.connect(self.reject)
+ok_btn = QPushButton("确认")
+_style_button(ok_btn, "danger")
+ok_btn.setMinimumWidth(90)
+
+
+=== Page 9 ===
+ok_btn.clicked.connect(self._on_confirm)
+btn_row.addWidget(cancel_btn)
+btn_row.addWidget(ok_btn)
+layout.addLayout(btn_row)
+self.setStyleSheet(f"QDialog {{ background-color: {BG_PANEL}; border: 1px solid
+{BORDER}; }}")
+def _on_confirm(self) -> None:
+self._result = True
+self.accept()
+@property
+def confirmed(self) -> bool:
+return self._result
+class DetailDialog(QDialog):
+def __init__(self, title: str, content: str, parent=None):
+super().__init__(parent)
+self.setWindowTitle(title)
+self.setModal(True)
+self.setMinimumSize(520, 360)
+layout = QVBoxLayout(self)
+layout.setContentsMargins(20, 20, 20, 16)
+title_label = QLabel(title)
+title_label.setFont(QFont("Microsoft YaHei", 13, QFont.Weight.Bold))
+title_label.setStyleSheet(f"color: {ACCENT}; background: transparent;")
+layout.addWidget(title_label)
+editor = QTextEdit()
+editor.setReadOnly(True)
+editor.setPlainText(content)
+layout.addWidget(editor, 1)
+btn = QPushButton("关闭")
+_style_button(btn, "primary")
+btn.setMinimumWidth(100)
+btn.clicked.connect(self.accept)
+row = QHBoxLayout()
+row.addStretch()
+row.addWidget(btn)
+layout.addLayout(row)
+self.setStyleSheet(f"QDialog {{ background-color: {BG_PANEL}; }}")
+def show_info(parent, title: str, message: str) -> None:
+StyledDialog(title, message, "info", parent).exec()
+def show_success(parent, title: str, message: str) -> None:
+StyledDialog(title, message, "success", parent).exec()
+def show_warning(parent, title: str, message: str) -> None:
+StyledDialog(title, message, "warning", parent).exec()
+def show_error(parent, title: str, message: str) -> None:
+StyledDialog(title, message, "error", parent).exec()
+def ask_confirm(parent, title: str, message: str) -> bool:
+dlg = ConfirmDialog(title, message, parent)
+dlg.exec()
+return dlg.confirmed
+# ==== ui/__init__.py (0行) ====
+# ==== ui/login_window.py (491行) ====
+import math
+import random
+
+
+=== Page 10 ===
+from PyQt6.QtCore import Qt, QTimer, QPointF, pyqtSignal
+from PyQt6.QtGui import QPainter, QColor, QLinearGradient, QRadialGradient, QFont, QPen
+from PyQt6.QtWidgets import (
+QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
+QStackedWidget, QFrame, QGraphicsDropShadowEffect,
+)
+from
+core.constants
+import
+APP_NAME,
+APP_VERSION,
+DEFAULT_USERNAME,
+DEFAULT_PASSWORD
+from core.auth import AuthManager
+from core.dialogs import show_success, show_error
+from core.styles import ACCENT, BG_DARK, TEXT_SECONDARY, ACCENT_GLOW, BORDER
+class ParticleCanvas(QWidget):
+def __init__(self, parent=None):
+super().__init__(parent)
+self._particles: list[dict] = []
+self._nodes: list[dict] = []
+self._phase = 0.0
+self._timer = QTimer(self)
+self._timer.timeout.connect(self._tick)
+self._timer.start(33)
+self._init_particles()
+self._init_nodes()
+def _init_particles(self) -> None:
+for _ in range(120):
+self._particles.append({
+"x": random.uniform(0, 1),
+"y": random.uniform(0, 1),
+"vx": random.uniform(-0.0005, 0.0005),
+"vy": random.uniform(-0.0008, -0.0002),
+"size": random.uniform(1.0, 3.0),
+"alpha": random.uniform(0.1, 0.5),
+"phase": random.uniform(0, math.pi * 2),
+"hue": random.choice([0.55, 0.58, 0.62]),
+})
+def _init_nodes(self) -> None:
+for _ in range(16):
+self._nodes.append({
+"x": random.uniform(0.1, 0.9),
+"y": random.uniform(0.15, 0.85),
+"r": random.uniform(2, 5),
+"phase": random.uniform(0, math.pi * 2),
+})
+def _tick(self) -> None:
+self._phase += 0.03
+for p in self._particles:
+p["x"] += p["vx"]
+p["y"] += p["vy"]
+p["phase"] += 0.04
+if p["y"] < -0.05:
+p["y"] = 1.05
+p["x"] = random.uniform(0, 1)
+if p["x"] < 0 or p["x"] > 1:
+p["vx"] *= -1
+self.update()
+
+
